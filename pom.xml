@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ru.opash.web</groupId>
+  <artifactId>lab2-webapp</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>Лабораторная работа 2 - Опаш А.Б., 4314</name>
+  <description>Web-проект из maven-archetype-webapp 1.4</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Java 17 вместо устаревшего уровня 7 из архетипа. -->
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencies>
+    <!-- JUnit для модульных тестов; scope test исключает его из WAR.
+         В этой работе Java-тестов нет: проверяется запуск JSP в Tomcat. -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>lab2-webapp</finalName>
+    <!-- Фиксируем версии плагинов стандартного жизненного цикла WAR. -->
+    <pluginManagement>
+      <plugins>
+        <!-- clean: удаляет результаты предыдущей сборки из target. -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- resources: копирует ресурсы приложения и тестов. -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- compiler: компилирует Java-код и код тестов, если они есть. -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <!-- surefire: выполняет модульные тесты на фазе test. -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <!-- war: упаковывает webapp, классы и библиотеки на фазе package. -->
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <!-- install: помещает WAR и POM в локальный репозиторий .m2. -->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <!-- deploy: публикует артефакт в удалённый Maven-репозиторий.
+             В лабораторной не вызывается; копирование в Tomcat отдельно. -->
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
